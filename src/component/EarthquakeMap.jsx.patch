@@ -1,0 +1,32 @@
+basemap: 'topo-vector',
+    });
+=======
+    const map = new Map({
+      basemap: 'streets',
+    });
+>>>>>>> REPLACE
+
+<<<<<<< SEARCH
+      renderer: {
+        type: 'simple',
+        symbol: {
+          type: 'simple-marker',
+          style: 'circle',
+          color: 'red',
+          size: 6,
+        },
+      },
+=======
+      renderer: {
+        type: 'simple',
+        symbol: {
+          type: 'simple-marker',
+          style: 'diamond',
+          color: 'yellow',
+          size: 10,
+          outline: {
+            color: 'black',
+            width: 1,
+          },
+        },
+      },
