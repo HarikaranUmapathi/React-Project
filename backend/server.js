@@ -13,7 +13,7 @@ app.use(express.json());
 app.get('/api/geojson', async (req, res) => {
   try {
     const response = await axios.get(
-      'https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_month.geojson'
+      'hari.geojson'
     );
 
     // Optional: filter or transform if needed

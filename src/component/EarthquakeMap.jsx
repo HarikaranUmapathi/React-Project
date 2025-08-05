@@ -25,7 +25,7 @@ const EarthquakeMap = () => {
 
 
     const geojsonLayer = new GeoJSONLayer({
-      url: 'http://localhost:3001/api/geojson', // Connect to Express API
+      url: 'http://localhost:3001/api/sites', // Connect to Express API
       popupTemplate: {
         title: 'Magnitude {mag} Earthquake',
         content: `
