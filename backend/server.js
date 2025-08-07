@@ -13,7 +13,7 @@ app.use(express.json());
 app.get('/api/geojson', async (req, res) => {
   try {
     const response = await axios.get(
-      'hari.geojson'
+      'https://developers.arcgis.com/documentation/mapping-and-location-services/mapping/data-layers/#display-data-from-a-geojson-file'
     );
 
     // Optional: filter or transform if needed

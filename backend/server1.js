@@ -1,42 +1,30 @@
+// backend/server.js
 import express from 'express';
 import cors from 'cors';
-import fs from 'fs/promises';
+import fs from 'fs/promises'; // Use promises API
 import path from 'path';
-import { fileURLToPath } from 'url';
-
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
 
 const app = express();
-const port = 3001;
+const PORT = process.env.PORT || 3001;
 
-// Basic CORS setup
-app.use(cors({
-  origin: ['http://localhost:3000'],
-  methods: ['GET'],
-  allowedHeaders: ['Content-Type']
-}));
-
+app.use(cors());
 app.use(express.json());
 
-// Serve GeoJSON from hari.json
-app.get('/api/sites', async (req, res) => {
+// 🔄 Serve local GeoJSON file
+app.get('/api/geojson', async (req, res) => {
   try {
-    const filePath = path.join(__dirname, 'hari.json');
-    const rawData = await fs.readFile(filePath, 'utf8');
-    const geoData = JSON.parse(rawData);
-    res.json(geoData);
-  } catch (err) {
-    console.error('🔥 Error loading GeoJSON:', err.message);
-    res.status(500).send('Failed to load site data');
+    const filePath = path.join(process.cwd(), 'hari.json'); // Adjust path if needed
+    const fileData = await fs.readFile(filePath, 'utf8');
+    const jsonData = JSON.parse(fileData);
+
+    res.json(jsonData);
+  } catch (error) {
+    console.error('Error reading hari.json:', error.message);
+    res.status(500).json({ error: 'Failed to load GeoJSON data' });
   }
 });
 
-// Root route
-app.get('/', (req, res) => {
-  res.send('🌍 Earthquake map backend is running!');
-});
-
-app.listen(port, () => {
-  console.log(`✅ Server running at http://localhost:${port}`);
+// 🚀 Start server
+app.listen(PORT, () => {
+  console.log(`🚀 Server running at http://localhost:${PORT}`);
 });
